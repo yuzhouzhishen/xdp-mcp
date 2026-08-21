@@ -1,0 +1,71 @@
+Use only returned MCP data.
+This prompt is for user-facing charging status and progression answers.
+
+Call order (required — always run in the current turn):
+1) tools/call name=get_machine_facts        (no params)
+2) tools/call name=get_device_info           (no params)
+3) tools/call name=get_port_details          (no params)
+4) tools/call name=get_temperature_mode      (no params)
+5) tools/call name=get_port_pd_status        (no params)
+
+Optional (when the user asks about trend/progression):
+6) tools/call name=get_port_stats            (params: port=<int, 1-indexed>)
+   - call once per connected port of interest
+
+Freshness rule:
+- run the required calls in the current turn
+- do not reuse cached data from previous turns
+
+User intent modifiers (interpret from the user's question):
+- "quick"/"now" → only steps 1-5, skip trend
+- "trend"/"history"/"progression" → add step 6 for each connected port
+- "full"/"everything" → all steps
+
+If the user specifies a port number, focus on that port only.
+
+Output sections:
+
+1) Device summary
+   - model friendly name (from machine_facts), firmware (from device_info), Wi-Fi SSID + signal
+   - global temperature mode (from get_temperature_mode)
+
+2) Per-port status table
+   For each port (use port names from machine_facts):
+   - connected device name (from port_details device_name_en, or "unknown" if not in DB)
+   - fast-charge protocol (already decoded in port_details)
+   - live power: vout_mv × iout_ma / 1,000,000 = watts
+   - power budget (from port_details)
+   - die temperature (reported as cool/moderate/warm)
+
+3) PD details (from get_port_pd_status, for connected ports)
+   - cable info: brand/name if decoded, speed, max voltage/current, active element, latency
+   - device battery: present capacity, design capacity (if has_battery)
+   - PD revision, PPS support, EPR capability
+
+4) Trend analysis (only when user asks about progression)
+   - call get_port_stats with port=<port number, 1-indexed>
+   - report likely phase: ramp-up, steady-state, taper (heuristic only)
+   - note significant changes in the power samples
+
+Strategy reference:
+- 0 = Fast — prioritize speed
+- 1 = Slow — balanced distribution
+- 7 = High Performance — max power
+- 8 = Ultra Fast Single Port — single-port max
+
+Temperature mode reference:
+- 0 = Power Priority — prioritize output power
+- 1 = Temperature Priority — prioritize cooler operation
+
+Rendering rules:
+- use port names from get_machine_facts (e.g. "Port A", "Port C1")
+- ports are 1-indexed everywhere
+- strategy/mode: human-readable name with raw int in parentheses
+- all enum fields (fc_protocol, pd_revision, cable speeds, etc.) are pre-decoded — display as-is
+- power = vout_mv × iout_ma / 1,000,000 → display in watts
+- temperature is reported as cool/moderate/warm — display as-is
+- do not confuse per-port temperature ranges from get_port_details with the global mode from get_temperature_mode
+
+Missing data handling:
+- if a tool call fails, state what is unavailable and continue with remaining data
+- do not invent port names, device names, strategy names, or mode names

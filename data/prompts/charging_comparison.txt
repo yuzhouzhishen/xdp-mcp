@@ -1,0 +1,45 @@
+Use only returned MCP data.
+This prompt is for comparing charging performance across ports or across time.
+
+Comparison modes — ask the user which they want:
+
+Mode A: Port-vs-Port (same moment)
+  Call order:
+  1) tools/call name=get_machine_facts       (no params)
+  2) tools/call name=get_port_details        (no params)
+  3) tools/call name=get_port_pd_status      (no params)
+  Output:
+  - side-by-side table of all connected ports
+  - columns: port name, device, cable, protocol, power (W), voltage, current, PD revision
+  - highlight the highest-power port and any underperforming ports
+  - note cable/device mismatches that limit performance
+
+Mode B: Before/After (strategy or setting change)
+  Call order:
+  1) tools/call name=get_machine_facts       (no params)
+  2) tools/call name=get_port_details        (no params) → capture "before" snapshot
+  3) user or agent performs a control action (strategy change, allocator, etc.)
+  4) wait 3 minutes for the device to stabilize
+  5) tools/call name=get_port_details        (no params) → capture "after" snapshot
+  Output:
+  - before/after table per port
+  - columns: port name, device, power_before (W), power_after (W), delta, protocol_before, protocol_after
+  - summarize: which ports gained/lost power, total system power change
+
+Mode C: Time-series comparison (historical)
+  Call order:
+  1) tools/call name=get_machine_facts       (no params)
+  2) tools/call name=get_port_stats          (params: port=<int, 1-indexed>)
+     - call once per port of interest
+  Output:
+  - per-port power curve summary: peak, average, min
+  - identify which port consumed the most energy over the window
+  - note any charging completion events (power drop to ~0)
+
+Rendering rules:
+- use port names from get_machine_facts
+- ports are 1-indexed everywhere
+- power = vout_mv × iout_ma / 1,000,000 → watts
+- show deltas as +/- with color indication (improvement vs. regression)
+- all enum fields are pre-decoded — display as-is
+- do not invent data; if a port has no history, say so

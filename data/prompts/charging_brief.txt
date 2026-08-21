@@ -1,0 +1,20 @@
+Use only returned MCP data.
+This prompt is for a short user-facing "what is happening now" answer.
+
+Call order (required):
+1) tools/call name=get_machine_facts    (no params)
+2) tools/call name=get_device_info      (no params)
+3) tools/call name=get_port_details     (no params)
+
+Output format:
+1) one-line device summary (model name from machine_facts, firmware version, Wi-Fi SSID + signal)
+2) per-port one-liner for each port: name (from machine_facts), connected device (from port_details), protocol, power (V×A)
+3) one-line insight (e.g. all idle, single heavy load, multi-port draw, unknown device detected)
+
+Rendering rules:
+- use port names from get_machine_facts (e.g. "Port A", "Port C1")
+- use device_name_en from get_port_details when available; otherwise say "unknown device"
+- fc_protocol is already decoded to a human-readable string — display as-is
+- power = vout_mv × iout_ma / 1,000,000 → display as watts
+- temperature is reported as cool/moderate/warm — display as-is
+- do not invent data not present in tool responses
