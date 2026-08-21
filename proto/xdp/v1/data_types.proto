@@ -1,0 +1,642 @@
+syntax = "proto3";
+
+package xdp.v1;
+
+option go_package = "xdp-mcp/proto/xdp/v1;xdp";
+
+enum CommandStatus {
+  SUCCESS = 0;
+  FAILURE = 1;
+  FLASH_NOT_WRITABLE_AT_HIGH_TEMPERATURE = 2;
+}
+
+enum ConfigOperation {
+  CONFIG_UPDATE = 0;
+  CONFIG_REQUEST_UPLOAD = 1;
+}
+
+enum PowerState {
+  POWER_OFF = 0;
+  POWER_ON = 1;
+}
+
+enum WiFiState {
+  CONFIGURATION = 0;
+  SCAN_AND_CONNECT = 1;
+  CONNECTING = 2;
+  CONNECTED = 3;
+  CHECKING_CONN = 4;
+  IDLE = 5;
+  DISCONNECTED = 6;
+  RECONNECTING = 7;
+  WAITING_FOR_NEXT = 8;
+  SCANNING = 9;
+  CONNECTION_ABORT = 10;
+  WAITING_FOR_DEFAULT = 11;
+}
+
+enum TemperatureMode {
+  POWER_PRIORITY = 0x00;
+  TEMPERATURE_PRIORITY = 0x01;
+}
+
+enum DisplayMode {
+  OFF = 0;
+  MANUAL = 1;
+  POWER_METER = 2;
+}
+
+enum CableCompensation {
+  RESISTANCE_65_MOHM = 0;
+  RESISTANCE_100_MOHM = 1;
+}
+
+enum FixedVoltageOffset {
+  OFFSET_0_MV = 0;
+  OFFSET_100_MV = 1;
+  OFFSET_150_MV = 2;
+  OFFSET_200_MV = 3;
+}
+
+enum DisplayFlip {
+  option deprecated = true;
+  NORMAL = 0;
+  FLIP = 1;
+}
+
+enum FastChargingProtocol {
+  NONE = 0;
+  QC2 = 1;
+  QC3 = 2;
+  QC3P = 3;
+  SFCP = 4;
+  AFC = 5;
+  FCP = 6;
+  SCP = 7;
+  VOOC1P0 = 8;
+  VOOC4P0 = 9;
+  SVOOC2P0 = 10;
+  TFCP = 11;
+  UFCS = 12;
+  PE1 = 13;
+  PE2 = 14;
+  PD_FIX5V = 15;
+  PD_FIXHV = 16;
+  PD_SPR_AVS = 17;
+  PD_PPS = 18;
+  PD_EPR_HV = 19;
+  PD_AVS = 20;
+  NOT_CHARGING = 255;
+}
+
+enum PortType {
+  TYPE_A = 0;
+  TYPE_C = 1;
+}
+
+enum TaskExecutionStatus {
+  PENDING = 0;
+  SUCCEEDED = 1;
+  FAILED = 2;
+}
+
+enum DisplayRotation {
+  option deprecated = true;
+  ROTATION_0 = 0;
+  ROTATION_90 = 1;
+  ROTATION_180 = 2;
+  ROTATION_270 = 3;
+}
+
+enum IdleAnimationType {
+  IDLE_NONE = 0;
+  IDLE_METEOR = 1;
+  IDLE_GAME_OF_LIFE = 2;
+  IDLE_RIPPLE = 3;
+  IDLE_RAIN = 4;
+}
+
+enum ManageAction {
+  CREATE = 0;
+  UPDATE = 1;
+  DELETE = 2;
+  READ = 3;
+}
+
+enum WiFiAuthMode {
+  WIFI_AUTH_OPEN = 0;
+  WIFI_AUTH_WEP = 1;
+  WIFI_AUTH_WPA_PSK = 2;
+  WIFI_AUTH_WPA2_PSK = 3;
+  WIFI_AUTH_WPA_WPA2_PSK = 4;
+  WIFI_AUTH_ENTERPRISE = 5;
+  WIFI_AUTH_WPA3_PSK = 6;
+  WIFI_AUTH_WPA2_WPA3_PSK = 7;
+  WIFI_AUTH_WAPI_PSK = 8;
+  WIFI_AUTH_OWE = 9;
+  WIFI_AUTH_WPA3_ENT_192 = 10;
+  WIFI_AUTH_WPA3_EXT_PSK = 11;
+  WIFI_AUTH_WPA3_EXT_PSK_MIXED_MODE = 12;
+  WIFI_AUTH_DPP = 13;
+  WIFI_AUTH_WPA3_ENTERPRISE = 14;
+  WIFI_AUTH_WPA2_WPA3_ENTERPRISE = 15;
+}
+
+enum ChargingStrategy {
+  FAST_CHARGING = 0;
+  SLOW_CHARGING = 1;
+  HIGH_PERFORMANCE_CHARGING = 7;
+  ULTRA_FAST_SINGLE_PORT_CHARGING = 8;
+}
+
+enum UpgradeStatus {
+  UPGRADE_START = 0;
+  UPGRADE_FAIL = 1;
+  UPGRADE_SUCCESS = 2;
+}
+
+enum UpgradeFailureReason {
+  REASON_NONE = 0;
+  REASON_ESP_ERROR = 1;
+  REASON_CONFIRM_FAILED = 2;
+  REASON_CONFIRM_TIMEOUT = 3;
+}
+
+enum ManageFeature {
+  FPGA_POWER_CONTROL = 0;
+  POWER_ALLOCATOR = 1;
+}
+
+enum ProgrammerState {
+  STATE_INIT = 0;
+  SEND_METADATA = 1;
+  WAIT_METADATA_ACK = 2;
+  SEND_BLOCKS = 3;
+  WAIT_BLOCKS_ACK = 4;
+  SEND_IUM = 5;
+  WAIT_IUM_ACK = 6;
+  DONE = 7;
+  ERROR = 8;
+}
+
+enum DeviceModel {
+  DEVB = 0;
+  PRO = 1;
+  ULTRA = 2;
+  BIRD = 3;
+  FAKE = 4;
+}
+
+enum DeviceConfigEntity {
+  ENTITY_HARDWARE_REVISION = 0;
+  ENTITY_PRODUCT_FAMILY = 1;
+  ENTITY_DEVICE_MODEL = 2;
+  ENTITY_DEVICE_COLOR = 3;
+  ENTITY_DEVICE_NAME = 4;
+}
+
+message Version {
+  uint32 major = 1;
+  uint32 minor = 2;
+  uint32 patch = 3;
+}
+
+message PowerFeatures {
+  bool enable_tfcp = 1;
+  bool enable_pe = 2;
+  bool enable_qc2p0 = 3;
+  bool enable_qc3p0 = 4;
+  bool enable_qc3plus = 5;
+  bool enable_afc = 6;
+  bool enable_fcp = 7;
+  bool enable_hv_scp = 8;
+  bool enable_lv_scp = 9;
+  bool enable_sfcp = 10;
+  bool enable_apple = 11;
+  bool enable_samsung = 12;
+  bool enable_ufcs = 13;
+  bool enable_pd = 14;
+  bool enable_pd_compat_mode = 15;
+  bool limited_current_mode = 16;
+  bool enable_pd_lvpps = 17;
+  bool enable_pd_epr = 18;
+  bool enable_pd_rpi = 19;
+  bool enable_pd_hvpps = 20;
+  bool enable_pd_hard_reset_on_refusal = 21;
+  bool enable_pd_spr_avs = 22;
+}
+
+message ClientPDStatus {
+  uint32 battery_vid = 1;
+  uint32 battery_pid = 2;
+  uint32 battery_design_capacity = 3;
+  uint32 battery_last_full_charge_capacity = 4;
+  uint32 battery_present_capacity = 5;
+  bool battery_invalid = 6;
+  bool battery_present = 7;
+  uint32 battery_status = 8;
+  bool cable_is_active = 9;
+  bool cable_termination_type = 10;
+  bool cable_epr_mode_capable = 11;
+  uint32 cable_active_phy_type = 12;
+  uint32 cable_latency = 13;
+  uint32 cable_max_vbus_voltage = 14;
+  uint32 cable_max_vbus_current = 15;
+  uint32 cable_usb_highest_speed = 16;
+  uint32 cable_active_element = 17;
+  bool cable_active_usb4 = 18;
+  bool cable_active_usb2p0 = 19;
+  bool cable_active_usb3p2 = 20;
+  bool cable_active_usb_lanes = 21;
+  bool cable_active_optically_isolated = 22;
+  bool cable_active_usb4_asym = 23;
+  bool cable_active_usb_gen = 24;
+  bool request_epr_mode_capable = 25;
+  uint32 request_pdo_id = 26;
+  bool request_usb_communications_capable = 27;
+  bool request_capability_mismatch = 28;
+  uint32 sink_capabilities = 29;
+  uint32 sink_cap_pdo_count = 30;
+  uint32 status_temperature = 31;
+  uint32 cable_vid = 32;
+  uint32 cable_pid = 33;
+  uint32 manufacturer_vid = 34;
+  uint32 manufacturer_pid = 35;
+  uint32 sink_minimum_pdp = 36;
+  uint32 sink_operational_pdp = 37;
+  uint32 sink_maximum_pdp = 38;
+  uint32 operating_current = 40;
+  uint32 pd_revision = 41;
+  bool pps_charging_supported = 42;
+  bool has_battery = 43;
+  bool dual_role_power = 44;
+  bool has_emarker = 45;
+  uint32 operating_voltage = 46;
+  bool request_ppsavs = 47;
+  uint32 cable_xid = 48;
+  uint32 bcd_device = 49;
+}
+
+message DisplayConfiguration {
+  option deprecated = true;
+  uint32 intensity = 1;
+  DisplayMode mode = 2;
+  DisplayFlip flip = 3;
+  uint32 mode_param = 4;
+  uint32 rotation = 5;
+  IdleAnimationType idle_animation = 6;
+  uint32 charging_animation_duration = 7;
+  optional bool hourly_chime = 8;
+}
+
+message DisplayConfig {
+  DisplayMode mode = 1;
+  uint32 intensity = 2;
+  DisplayFlip flip = 3 [deprecated = true];
+  uint32 rotation = 4;
+  IdleAnimationType idle_animation = 5;
+  uint32 charging_animation_duration = 6;
+  optional bool hourly_chime = 7;
+}
+
+message PortDetails {
+  uint64 session_charge = 1;
+  uint32 session_id = 2;
+  uint32 manufacturer_vid = 3;
+  uint32 manufacturer_pid = 4;
+  uint32 battery_vid = 5;
+  uint32 battery_pid = 6;
+  uint32 iout_value = 7;
+  uint32 vout_value = 8;
+  uint32 die_temperature = 9;
+  uint32 vin_value = 10;
+  bool connected = 11;
+  FastChargingProtocol fc_protocol = 12;
+  uint32 power_budget = 13;
+}
+
+message MachineConfig {
+  uint64 timestamp = 1;
+  repeated MachinePortConfig ports = 2;
+  ChargingStrategyData charging = 3;
+  TemperatureMode temperature_mode = 4;
+  DisplayConfig display = 5;
+}
+
+message MachinePortConfig {
+  uint32 port_id = 1;
+  PortConfigData config = 2;
+}
+
+message PortConfigData {
+  bool enabled = 1;
+  PowerFeatures features = 2;
+  uint32 custom_pdo_voltage_mv = 3;
+}
+
+message PowerAllocationEntry {
+  repeated uint32 power_allocation = 1;
+}
+
+message PowerAllocationTable {
+  uint32 version = 1;
+  repeated PowerAllocationEntry entries = 2;
+}
+
+message ChargingStrategyData {
+  uint32 strategy_type = 1;
+  optional uint32 identifier = 2;
+  optional PowerAllocationTable static_table = 3;
+}
+
+message PortConfig {
+  uint32 version = 1;
+  PowerFeatures features = 2;
+}
+
+message CompatibilitySettings {
+  bool enable_tfcp = 1;
+  bool enable_fcp = 2;
+  bool enable_ufcs = 3;
+  bool enable_hv_scp = 4;
+  bool enable_lv_scp = 5;
+}
+
+message PowerHistoricalStats {
+  uint32 current = 1;
+  uint32 voltage = 2;
+}
+
+message PowerStatistics {
+  uint32 charging_protocol_version = 1;
+  uint32 current = 2;
+  uint32 voltage = 3;
+  uint32 temperature = 4;
+  uint32 battery_last_full_charge_capacity = 5;
+  uint32 battery_present_capacity = 6;
+}
+
+message SSIDInfo {
+  string ssid = 1;
+  sint32 rssi = 2;
+  WiFiAuthMode auth_mode = 3;
+  bool saved = 4;
+}
+
+message WiFiRecord {
+  string ssid = 1;
+  WiFiAuthMode auth_mode = 2;
+}
+
+message PortStatusData {
+  uint32 charging_minutes = 1;
+  PowerFeatures features = 2;
+  PortDetails details = 3;
+  PortType port_type = 4;
+  uint32 custom_pdo_voltage_mv = 5;
+  bool cable_compensation_enable = 6;
+  CableCompensation cable_resistance = 7;
+  FixedVoltageOffset cable_voltage_offset = 8;
+}
+
+message FeatureFlag {
+  bool device_power_on = 1;
+  bool ble_on = 2;
+  bool syslog_on = 3;
+}
+
+message DeviceInfo {
+  string psn = 1;
+  string model = 2;
+  Version ap_version = 3;
+  Version bp_version = 4;
+  Version fpga_version = 5;
+  Version zrlib_version = 6;
+  string ble_mac = 7;
+  string wifi_mac = 8;
+  string bssid = 9;
+  string ssid = 10;
+  sint32 rssi = 11;
+  uint32 wifi_protocol = 12;
+  uint32 channel = 13;
+}
+
+message DeviceBootInfo {
+  Version esp32_version = 1;
+  Version sw3566_version = 2;
+  Version fpga_version = 3;
+  Version zrlib_version = 4;
+  Version esp_idf_version = 5;
+  uint32 chip_cores = 6;
+  uint32 chip_model = 7;
+  uint32 chip_features = 8;
+  uint32 chip_revision = 9;
+  bytes ble_mac = 10;
+  bytes ipv4 = 11;
+  bytes ipv6 = 12;
+  uint64 uptime = 13;
+  sint32 wifi_max_tx_power = 14;
+  uint32 active_mcu_count = 15;
+  uint32 fs_total_size = 16;
+  uint32 fs_used_size = 17;
+  uint32 reset_reason = 18;
+  string hardware_revision = 19;
+  string device_model = 20;
+  string product_family = 21;
+}
+
+message DeviceStatsData {
+  bool initial_boot = 1;
+  uint32 free_heap_size = 2;
+  uint32 free_internal_heap_size = 3;
+  uint32 minimum_free_heap_size = 4;
+  uint32 wifi_association_count = 5;
+  uint32 wifi_disassociation_count = 6;
+  sint32 wifi_rssi = 7;
+  uint32 wifi_channel = 8;
+  uint32 wifi_connection_time = 9;
+  uint32 mqtt_connection_time = 10;
+  uint32 connectivity_failure_count = 11;
+  uint32 dns_resolution_failure_count = 12;
+  uint32 mqtt_connection_count = 13;
+  uint32 mqtt_message_tx_count = 14;
+  uint32 mqtt_message_rx_count = 15;
+  uint32 temperature = 16;
+}
+
+message PortStatsData {
+  uint32 voltage = 1;
+  uint32 amperage = 2;
+  uint32 temperature = 3;
+  uint32 vin_value = 4;
+  uint32 session_id = 5;
+  uint64 session_charge = 6;
+  uint32 manufacturer_vid = 7;
+  uint32 manufacturer_pid = 8;
+  uint32 battery_vid = 9;
+  uint32 battery_pid = 10;
+}
+
+message PortStatsEntry {
+  uint32 port = 1;
+  repeated PortStatsData stats = 2;
+}
+
+message PowerHistoricalData {
+  repeated PortStatsEntry data = 1;
+}
+
+message PowerAllocationData {
+  uint32 power_budget = 1;
+  uint32 remaining_power = 2;
+  uint32 adc_value = 3;
+  uint32 temperature = 4;
+
+  message PortAllocation {
+    uint32 source_cap = 1;
+    uint32 usage = 2;
+  }
+
+  repeated PortAllocation port_allocations = 5;
+}
+
+message PDPCapData {
+  uint32 port = 1;
+  bytes data = 2;
+}
+
+message ProgrammerStart {
+  Version programmer_version = 1;
+}
+
+message ProgrammerFinish {
+  bool success = 1;
+  ProgrammerState error_reason = 2;
+}
+
+message UpgradeData {
+  Version esp32_version = 1;
+  Version mcu_version = 2;
+  Version fpga_version = 3;
+  UpgradeStatus status = 4;
+  UpgradeFailureReason reason = 5;
+  sint32 esp_err = 6;
+  uint32 active_port_count = 7;
+}
+
+message UartMetricsData {
+  uint32 reset_state_count = 1;
+  uint32 resend_count = 2;
+  uint32 sent_failed_count = 3;
+  uint32 sent_count = 4;
+}
+
+message PingInfo {
+  int32 dummy = 1;
+}
+
+message SW3566BootloaderInfo {
+  message BootloaderInfo {
+    uint32 version = 1;
+    uint32 flash_timestamp = 2;
+  }
+  repeated BootloaderInfo infos = 1;
+}
+
+message OutOfMemoryAlertInfo {
+  uint32 free_heap_size = 1;
+  uint32 free_internal_heap_size = 2;
+  uint32 minimum_free_heap_size = 3;
+  uint32 free_heap_size_threshold = 4;
+}
+
+message OverTemperatureAlertInfo {
+  uint32 temperature = 1;
+  uint32 threshold_temperature = 2;
+}
+
+message ChargingAlertInfo {
+  uint32 port = 1;
+  uint32 pd_rx_soft_reset_count = 2;
+  uint32 pd_rx_hard_reset_count = 3;
+  uint32 pd_rx_error_count = 4;
+  uint32 pd_rx_cable_reset_count = 5;
+}
+
+enum ACDCSelfTestStatus {
+  ACDC_SELF_TEST_NOT_RUN = 0;
+  ACDC_SELF_TEST_PASSED = 1;
+  ACDC_SELF_TEST_NO_PORT = 2;
+  ACDC_SELF_TEST_FAIL_L0 = 16;
+  ACDC_SELF_TEST_FAIL_L1 = 17;
+  ACDC_SELF_TEST_FAIL_L2 = 18;
+  ACDC_SELF_TEST_FAIL_L3 = 19;
+}
+
+message ACDCSelfTestInfo {
+  ACDCSelfTestStatus status = 1;
+}
+
+message TaskExecutionResult {
+  uint32 task_id = 1;
+  TaskExecutionStatus status = 2;
+}
+
+message CoredumpPartitionSlice {
+  uint32 timestamp = 1;
+  uint32 offset = 2;
+  uint32 size = 3;
+  bool last = 4;
+  repeated uint32 data = 5;
+}
+
+message ConfigReport {
+  uint64 timestamp = 1;
+  MachineConfig config = 2;
+}
+
+message ConfigRequest {
+  string reason = 1;
+}
+
+message FPGAConfig {
+  uint32 adc_threshold_low = 1;
+  uint32 adc_threshold_high = 2;
+  uint32 action_deadzone = 3;
+}
+
+message PowerConfig {
+  uint32 version = 1;
+  uint32 power_budget = 2;
+  uint32 device_high_temp_threshold = 3;
+  uint32 device_high_temp_min_power = 4;
+  uint32 device_low_temp_threshold = 5;
+  uint32 device_over_temp_decrement = 6;
+  uint32 device_under_temp_increment = 7;
+  uint32 device_power_cooldown_time = 8;
+  uint32 overprovisioning_threshold = 9;
+  uint32 cap_increase_min_threshold = 10;
+  uint32 cap_decrease_min_threshold = 11;
+  uint32 port_power_cap_increase_threshold = 12;
+  uint32 port_power_cap_increase_step = 13;
+  uint32 port_power_cap_decrease_threshold = 14;
+  uint32 high_power_usage_threshold = 15;
+  uint32 low_power_usage_threshold = 16;
+  uint32 port_power_adjustment_threshold = 17;
+}
+
+message LicenseData {
+  repeated int32 f = 1;
+  optional int64 b = 2;
+  optional int64 a = 3;
+}
+
+message Task {
+  uint32 id = 1;
+  uint32 run_at = 2;
+  message Command {
+    uint32 service = 1;
+    bytes data = 2;
+  }
+  repeated Command commands = 3;
+}

@@ -1,0 +1,41 @@
+Use only returned MCP data.
+This prompt is for deep device and cable diagnostics.
+
+Call order (required):
+1) tools/call name=get_machine_facts    (no params)
+2) tools/call name=get_device_info      (no params)
+3) tools/call name=get_port_details     (no params)
+4) tools/call name=get_port_pd_status   (no params)
+
+Analysis to perform:
+
+1) Device health
+   - Wi-Fi signal: flag if rssi < -80 dBm as weak
+
+2) Per-port diagnosis (for each connected port)
+   - fast-charge protocol negotiated vs. device capability
+   - actual power vs. power_budget — is the port underdelivering?
+   - PD revision: flag devices still on PD 1.0 or 2.0
+
+3) Cable analysis (from get_port_pd_status)
+   - cable max current: ≤3A cable limiting a 5A-capable port?
+   - cable max voltage: 20V cable blocking EPR (>100W)?
+   - active element type: passive vs. re-timer vs. LRD
+   - e-marker present? (has_emarker) — required for 5A / EPR
+
+4) Compatibility issues
+   - capability mismatch flag from PD negotiation
+   - PPS requested but not supported
+   - EPR capable device with non-EPR cable (cable_epr_mode_capable)
+
+Output format:
+- per-port card with: device, cable, protocol, power, and any warnings
+- summary section: overall health score (good / attention needed / issues found)
+- actionable recommendations (e.g. "upgrade cable on Port C2 for full speed")
+
+Rendering rules:
+- use port names from get_machine_facts
+- all enum fields are pre-decoded — display as-is
+- temperature is reported as cool/moderate/warm — flag "warm" ports
+- flag issues with ⚠️, good status with ✅
+- do not invent capabilities or recommendations beyond what the data shows

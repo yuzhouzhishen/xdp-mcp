@@ -1,0 +1,25 @@
+syntax: glob
+
+# Local configuration
+config/
+
+# Build artifacts
+xdp-mcp
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+coverage.out
+bin/
+build/
+dist/
+tmp/
+
+# Editor/OS files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~

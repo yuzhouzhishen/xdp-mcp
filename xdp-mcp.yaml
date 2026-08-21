@@ -1,0 +1,8 @@
+listen_addr: ":8080"
+mqtt_broker_url: "mqtt://localhost:1883"
+mqtt_client_id: "xdp-mcp-dev"
+mqtt_ca_file: ""
+mqtt_cert_file: ""
+mqtt_key_file: ""
+database_url: "postgres://localhost:5432/xdp?sslmode=disable"
+gateway_base_url: "http://localhost:8081"

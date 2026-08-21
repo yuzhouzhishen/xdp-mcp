@@ -1,0 +1,120 @@
+pid,vid,brand_en,brand_zh,name_en,name_zh
+0x0009,0x2756,Hasselblad,Hasselblad,Hasselblad X2D 100C,Hasselblad X2D 100C
+0x0224,0x1a86,飞智,飞智,飞智散热器,飞智散热器
+0x02e6,0x04cb,FUJIFILM,FUJIFILM,FUJIFILM Camera,FUJIFILM Camera
+0x0454,0x05ac,Apple,Apple,Magic Keyboard 13-inch,Magic Keyboard 13英寸
+0x0455,0x05ac,Apple,Apple,Magic Keyboard 13-inch,Magic Keyboard 13英寸
+0x0c3b,0x045e,Microsoft,Microsoft,Surface,Surface
+0x0c56,0x045e,Microsoft,Microsoft,Surface Pro 9,Surface Pro 9
+0x0d68,0x054c,Sony,Sony,Sony Camera,Sony Camera
+0x125d,0x1532,other,Razer,Razer Blade 14-inch (2025),灵刃 14英寸 2025款
+0x13a2,0x05ac,Apple,Apple,MagSafe Battery,MagSafe Battery
+0x146c,0x0db0,other,MSI,MSI Claw 8 AI+,MSI Claw 8 AI+
+0x1573,0x0b05,ASUS,ASUS,ROG Xbox Ally X,ROG Xbox Ally X
+0x165f,0x05ac,Apple,Apple,MacBook Air (Intel),MacBook Air（Intel）
+0x1668,0x05ac,Apple,Apple,"MacBook Pro 13-inch (i5, 2017)","MacBook Pro 13英寸（i5，2017）"
+0x1669,0x05ac,Apple,Apple,MacBook Pro (Intel),MacBook Pro（Intel）
+0x166a,0x05ac,Apple,Apple,MacBook Pro 15-inch (2017),MacBook Pro 15英寸（2017）
+0x166e,0x05ac,Apple,Apple,"MacBook Air 13-inch (i5, 2019)","MacBook Air 13英寸（i5，2019）"
+0x166f,0x05ac,Apple,Apple,MacBook Pro 13-inch (2018),MacBook Pro 13英寸（2018）
+0x1670,0x05ac,Apple,Apple,MacBook Pro 16-inch (2019),MacBook Pro 16英寸（2019）
+0x1680,0x05ac,Apple,Apple,MacBook Pro (Intel),MacBook Pro（Intel）
+0x2060,0x057e,Nintendo,Nintendo,Nintendo Switch 2,Nintendo Switch 2
+0x2060,0x057e,Nintendo,Nintendo,Switch 2,Switch 2
+0x209e,0x2717,REDMI,REDMI,Redmi K Pad,红米 K Pad
+0x2205,0x2717,REDMI,REDMI,Redmi Book 16-inch (2024),Redmi Book 16英寸（2024）
+0x2307,0x2717,REDMI,REDMI,RedmiBook Pro 14-inch (2024),RedmiBook Pro 14英寸（2024）
+0x2700,0x290b,Beats,Beats,Beats Pill,Beats Pill
+0x3b00,0x12d1,HUAWEI,HUAWEI,MateBook 14-inch,MateBook 14英寸
+0x3b00,0x339b,HONOR,HONOR,MagicBook Pro 16-inch (2025),MagicBook Pro 16英寸（2025）
+0x5458,0x03f0,HP,HP,HP ZBook Fury 16-inch G10,HP ZBook Fury 16英寸 G10
+0x6237,0x0b05,ASUS,ASUS,ASUS Zenbook S14 (UX5406),ASUS Zenbook S14（UX5406）
+0x6379,0x2717,REDMI,REDMI,K80 Ultra,K80 至尊版
+0x6860,0x0b6a,Valve,Valve,Steam Deck,Steam Deck
+0x704e,0x0b05,ROG,ROG,ROG Strix G18 (G815LW),ROG Strix G18（G815LW）
+0x7100,0x05ac,Apple,Apple,"iPad Pro 3rd Generation (A12X, 2018)",iPad Pro（2018）
+0x7102,0x05ac,Apple,Apple,"iPad Pro 4th Generation (A12Z, 2020)","iPad Pro 4th Generation（A12Z，2020）"
+0x7108,0x05ac,Apple,Apple,"iPad Air 4th Generation (A14, 2020)","iPad Air 4th Generation（A14，2020）"
+0x7109,0x05ac,Apple,Apple,"iPad Pro 5th Generation (M1, 2021)","iPad Pro 5th Generation（M1，2021）"
+0x710c,0x05ac,Apple,Apple,"iPad Mini 6th Generation (A15, 2021)","iPad Mini 6th Generation（A15，2021）"
+0x710d,0x05ac,Apple,Apple,"iPad Air 5th Generation (M1, 2022)","iPad Air 5th Generation（M1，2022）"
+0x710e,0x05ac,Apple,Apple,"iPad Pro 6th Generation (M2, 2022)","iPad Pro 6th（M2，2022）"
+0x7111,0x05ac,Apple,Apple,"iPad 9th Generation (A13, 2021)","iPad 9th（A13，2021）"
+0x7112,0x05ac,Apple,Apple,"iPad 10th Generation (A14, 2022)","iPad 10th（A14，2022）"
+0x7114,0x05ac,Apple,Apple,"iPad Air 6th Generation (M2, 11-inch)","iPad Air 6th（M2，11英寸）"
+0x7115,0x05ac,Apple,Apple,"iPad Air 6th (M2, 13-inch)","iPad Air 6th（M2，13英寸）"
+0x7116,0x05ac,Apple,Apple,"iPad mini 7th (A17 Pro, 2024)","iPad mini 7th（A17 Pro，2024）"
+0x7117,0x05ac,Apple,Apple,"iPad Pro 7th (M4, 2024)","iPad Pro 7th（M4，2024）"
+0x711b,0x05ac,Apple,Apple,"iPad 11th (A16, 2025)","iPad 11th（A16，2025）"
+0x711c,0x05ac,Apple,Apple,"iPad Air 7th (M3, 2025)","iPad Air 7th（M3，2025）"
+0x711e,0x05ac,Apple,Apple,"iPad Pro (M5, 2025)","iPad Pro（M5，2025）"
+0x7300,0x05ac,Apple,Apple,MacBook Pro 15-inch (2019),MacBook Pro 15英寸（2019）
+0x7301,0x05ac,Apple,Apple,MacBook Pro (Intel),MacBook Pro（Intel）
+0x7302,0x05ac,Apple,Apple,"MacBook Air 13-inch (Intel, 2020)","MacBook Air 13英寸（Intel，2020）"
+0x7303,0x05ac,Apple,Apple,"MacBook Pro (i5, 2020)","MacBook Pro（i5，2020）"
+0x7304,0x05ac,Apple,Apple,MacBook Pro 13-inch (2020),MacBook Pro 13英寸（2020）
+0x7306,0x05ac,Apple,Apple,MacBook Pro (M1),MacBook Pro（M1）
+0x7307,0x05ac,Apple,Apple,MacBook Air (M1),MacBook Air（M1）
+0x7308,0x05ac,Apple,Apple,"MacBook Pro 14-inch (M1, 2021)","MacBook Pro 14英寸（M1，2021）"
+0x7309,0x05ac,Apple,Apple,"MacBook Pro 16-inch (M1, 2021)","MacBook Pro 16英寸（M1，2021）"
+0x730b,0x05ac,Apple,Apple,MacBook Air 13-inch (2022),MacBook Air 13英寸（2022）
+0x730c,0x05ac,Apple,Apple,MacBook Pro 14-inch (2023),MacBook Pro 14英寸（2023）
+0x730d,0x05ac,Apple,Apple,MacBook Pro 16-inch (2023),MacBook Pro 16英寸（2023）
+0x730e,0x05ac,Apple,Apple,MacBook Pro (M2),MacBook Pro（M2）
+0x7310,0x05ac,Apple,Apple,"MacBook Air (M2, 2023)","MacBook Air（M2，2023）"
+0x7311,0x05ac,Apple,Apple,"MacBook Pro (M3 Pro, 2023)","MacBook Pro（M3 Pro，2023）"
+0x7312,0x05ac,Apple,Apple,MacBook Pro M3 Series,MacBook Pro M3 Series
+0x7313,0x05ac,Apple,Apple,MacBook Pro (M3),MacBook Pro（M3）
+0x7314,0x05ac,Apple,Apple,MacBook Air 15-inch (M3),MacBook Air 15英寸（M3）
+0x7315,0x05ac,Apple,Apple,MacBook Pro (M4 Pro),MacBook Pro（M4 Pro）
+0x7316,0x05ac,Apple,Apple,MacBook Pro 14-inch (Intel),MacBook Pro 14英寸（Intel）
+0x7318,0x05ac,Apple,Apple,MacBook Air,MacBook Air
+0x7319,0x05ac,Apple,Apple,MacBook Pro (M4 Series),MacBook Pro（M4 Series）
+0x731a,0x05ac,Apple,Apple,MacBook Pro (M5),MacBook Pro（M5）
+0x731b,0x05ac,Apple,Apple,"MacBook Air (M4, 2025)","MacBook Air（M4，2025）"
+0x731c,0x05ac,Apple,Apple,"MacBook Air (M4, 2025)","MacBook Air（M4，2025）"
+0x7366,0x04e8,Samsung,Samsung,Galaxy Book5 Pro,Galaxy Book5 Pro
+0x7504,0x05ac,Apple,Apple,iPhone 12 Series,iPhone 12 系列
+0x7506,0x05ac,Apple,Apple,iPhone 12 Pro Max,iPhone 12 Pro Max
+0x7507,0x05ac,Apple,Apple,iPhone 13 mini,iPhone 13 mini
+0x7507,0x05ac,Apple,Apple,iPhone 13 mini,iPhone 13 mini
+0x7509,0x05ac,Apple,Apple,iPhone 13 Series,iPhone 13 Series
+0x7509,0x05ac,Apple,Apple,iPhone 13,iPhone 13
+0x750a,0x05ac,Apple,Apple,iPhone 13 Pro Max,iPhone 13 Pro Max
+0x750b,0x05ac,Apple,Apple,iPhone SE,iPhone SE
+0x750b,0x05ac,Apple,Apple,iPhone SE,iPhone SE
+0x750d,0x05ac,Apple,Apple,iPhone 14 Plus,iPhone 14 Plus
+0x750e,0x05ac,Apple,Apple,iPhone 14 Series,iPhone 14 Series
+0x750e,0x05ac,Apple,Apple,iPhone 14 Series,iPhone 14 Series
+0x750f,0x05ac,Apple,Apple,iPhone 14 Pro Max,iPhone 14 Pro Max
+0x7510,0x05ac,Apple,Apple,iPhone 15,iPhone 15
+0x7511,0x05ac,Apple,Apple,iPhone 15 Plus,iPhone 15 Plus
+0x7512,0x05ac,Apple,Apple,iPhone 15 Pro,iPhone 15 Pro
+0x7513,0x05ac,Apple,Apple,iPhone 15 Pro Max,iPhone 15 Pro Max
+0x7515,0x05ac,Apple,Apple,iPhone 16 Series,iPhone 16 Series
+0x7517,0x05ac,Apple,Apple,iPhone 16 Series,iPhone 16 Series
+0x7518,0x05ac,Apple,Apple,iPhone Air,iPhone Air
+0x7519,0x05ac,Apple,Apple,iPhone 17 Pro Series,iPhone 17 Pro Series
+0x751b,0x05ac,Apple,Apple,iPhone 17,iPhone 17
+0x751c,0x05ac,Apple,Apple,iPhone 16e,iPhone 16e
+0x7700,0x05ac,Apple,Apple,HomePod mini,HomePod mini
+0x7803,0x05ac,Apple,Apple,Vision Pro,Vision Pro
+0x8892,0x03f0,HP,HP,HP Laptop,HP Laptop
+0x8979,0x03f0,HP,HP,"HP ZhanBook 66 Pro 14-inch (2021)","战66 Pro 14英寸（2021）"
+0x897f,0x03f0,HP,HP,HP Dragonfly Series,HP Dragonfly Series
+0x8990,0x03f0,HP,HP,EliteBook 835 G9,EliteBook 835 G9
+0x8b63,0x03f0,HP,HP,HP OMEN Series,惠普 OMEN 暗影精灵系列
+0x8c83,0x03f0,HP,HP,ProBook,ProBook
+0x8d8a,0x03f0,HP,HP,HP ZhanX,战X
+0x9847,0x043e,LG,LG,LG Gram,LG Gram
+0xa327,0x17ef,Lenovo,Lenovo,ThinkPad X1 Carbon,ThinkPad X1 Carbon
+0xa32c,0x17ef,Lenovo,Lenovo,ThinkPad T480,ThinkPad T480
+0xa33c,0x17ef,Lenovo,Lenovo,ThinkPad S2 4th Gen,ThinkPad S2 4th Gen
+0xa3e8,0x17ef,Lenovo,Lenovo,ThinkPad X-series,ThinkPad X-series
+0xa3ea,0x17ef,Lenovo,Lenovo,Lenovo ThinkPad,Lenovo ThinkPad
+0xa430,0x17ef,Lenovo,Lenovo,Lenovo Legion R9000P (2021),Lenovo Legion R9000P（2021）
+0xa54d,0x17ef,Lenovo,Lenovo,Lenovo Xiaoxin Pro 14-inch (2024),Lenovo Xiaoxin Pro 14英寸（2024）
+0xa5ab,0x17ef,Lenovo,Lenovo,ThinkPad T14 Pro,ThinkPad T14 Pro
+0xb057,0x413c,Dell,Dell,Dell XPS,Dell XPS
+0xf6ec,0x2717,Xiaomi,Xiaomi,Xiaomi Notebook Pro 14-inch (2022),Xiaomi Notebook Pro 14英寸（2022）
+0xf6ed,0x2717,Xiaomi,Xiaomi,Xiaomi Book Pro 14-inch (2022),Xiaomi Book Pro 14英寸（2022）

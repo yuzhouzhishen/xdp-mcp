@@ -1,0 +1,40 @@
+{
+    "product_family": "CP-02",
+    "brand_en": "CANDYSIGN",
+    "brand_zh": "制糖工厂",
+    "friendly_name_en": "CoCan",
+    "friendly_name_zh": "小电拼",
+    "max_power_budget": 160,
+    "ports": [
+        {
+            "index": 1,
+            "name": "A",
+            "connector_type": "A",
+            "power": 60
+        },
+        {
+            "index": 2,
+            "name": "C1",
+            "connector_type": "C",
+            "power": 140
+        },
+        {
+            "index": 3,
+            "name": "C2",
+            "connector_type": "C",
+            "power": 140
+        },
+        {
+            "index": 4,
+            "name": "C3",
+            "connector_type": "C",
+            "power": 140
+        },
+        {
+            "index": 5,
+            "name": "C4",
+            "connector_type": "C",
+            "power": 140
+        }
+    ]
+}

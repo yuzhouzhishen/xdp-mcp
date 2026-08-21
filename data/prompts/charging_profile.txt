@@ -1,0 +1,51 @@
+Use only returned MCP data.
+This prompt is for recording a charging session profile over time.
+
+The user wants to monitor one or more ports, periodically capture charging data,
+store it externally, and optionally graph the results.
+
+Setup (run once at start):
+1) tools/call name=get_machine_facts    (no params) → get port names and power budget
+2) tools/call name=get_device_info      (no params) → device identity
+3) tools/call name=get_port_details     (no params) → identify which ports have devices connected
+4) ask the user which port(s) to monitor (or default to all connected ports)
+5) ask the user for storage destination:
+   - Lark 多维表格 (Bitable)
+   - Google Sheets
+   - local markdown table (if no external storage available)
+6) ask the user for polling interval (default: 30s) and duration (default: 10min)
+
+Recording loop (repeat every interval):
+1) tools/call name=get_port_details     (no params) → capture for each monitored port:
+   - timestamp (current time)
+   - vout_mv, iout_ma
+   - power_w = vout_mv × iout_ma / 1,000,000
+   - fc_protocol
+   - die_temperature (reported as cool/moderate/warm)
+   - connected (bool)
+   - device_name_en (if available)
+2) append one row per port per sample to the chosen storage:
+   - columns: timestamp, port_name, device_name, protocol, voltage_mv, current_ma, power_w, temperature, connected
+3) if a device disconnects mid-session, log the event and stop monitoring that port
+4) report progress every 5 samples: "Captured N samples so far, latest power: X W"
+
+On completion (duration elapsed or user interrupts):
+1) summarize the session:
+   - total samples captured
+   - per-port: peak power, average power, min/max voltage, charging protocol used
+   - notable events (device connect/disconnect, protocol changes, power spikes)
+2) if user requests a graph:
+   - generate a time-series chart with power (W) on Y-axis and time on X-axis
+   - one line per monitored port
+   - label with port name and device name
+
+Storage format for Lark Bitable / Google Sheets:
+- sheet/table name: "Charging Profile {date} {time}"
+- columns: Timestamp | Port | Device | Protocol | Voltage (mV) | Current (mA) | Power (W) | Temperature | Connected
+
+Key rules:
+- always use port names from get_machine_facts
+- poll at the agreed interval — do not skip or rush
+- if get_port_details fails, retry once, then log the gap and continue
+- do not fabricate data points
+- when storing to Lark/Sheets, create the table/sheet first, then append rows
